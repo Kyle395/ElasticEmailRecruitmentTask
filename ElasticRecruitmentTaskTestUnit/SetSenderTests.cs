@@ -1,40 +1,41 @@
 ﻿using ElasticEmail.Model;
 using ElasticRecruitmentTask;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
 namespace ElasticRecruitmentTaskTestUnit
 {
     [TestClass]
     public class SetSenderTests
     {
+        SendSimpleMail sendSimpleMail;
+        EmailContent emailContent;
         [TestMethod]
-        public void SetSenderTest1()
+        public void SetSenderTestEmptyName()
         {
             string senderName = "          ";
             string senderMail = "<wojciech.lukasz99@gmail.com>";
-            SendSimpleMail sendSimpleMail = new SendSimpleMail();
-            EmailContent emailContent = new EmailContent();
+            sendSimpleMail = new SendSimpleMail();
+            emailContent = new EmailContent();
             sendSimpleMail.SetSender(senderName, emailContent);
             Assert.AreEqual(senderMail, emailContent.From);
         }
         [TestMethod]
-        public void SetSenderTest2()
+        public void SetSenderTestToLongName()
         {
             string senderName = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
             string senderMail = "<wojciech.lukasz99@gmail.com>";
-            SendSimpleMail sendSimpleMail = new SendSimpleMail();
-            EmailContent emailContent = new EmailContent();
+            sendSimpleMail = new SendSimpleMail();
+            emailContent = new EmailContent();
             sendSimpleMail.SetSender(senderName, emailContent);
             Assert.AreEqual(senderMail, emailContent.From);
         }
         [TestMethod]
-        public void SetSenderTest3()
+        public void SetSenderTestCorrectName()
         {
             string senderName = "Michael Scott";
             string senderMail = "<wojciech.lukasz99@gmail.com>";
-            SendSimpleMail sendSimpleMail = new SendSimpleMail();
-            EmailContent emailContent = new EmailContent();
+            sendSimpleMail = new SendSimpleMail();
+            emailContent = new EmailContent();
             sendSimpleMail.SetSender(senderName, emailContent);
             Assert.AreEqual(senderName + senderMail, emailContent.From);
         }

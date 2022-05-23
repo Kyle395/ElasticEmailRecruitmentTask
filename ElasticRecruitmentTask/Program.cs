@@ -1,33 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ElasticEmail.Api;
-using ElasticEmail.Client;
-using ElasticEmail.Model;
 
 
 namespace ElasticRecruitmentTask
 {
     class Program
     {
-        static bool menu()
+        private static bool menu()
         {
             MenuElements menuElements = new MenuElements();
-            menuElements.displayMainMenu();
+            menuElements.DisplayMainMenu();
             
             switch (Console.ReadLine())
             {
                 case "1":
-                    menuElements.displayFirstTask();
+                    menuElements.DisplayTask();
                     break;
                 case "2":
-                    menuElements.displaySecondTask();
+                    menuElements.DisplayTask(true);
                     break;
                 case "3":
                     return false;

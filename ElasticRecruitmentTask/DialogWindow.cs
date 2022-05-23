@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace ElasticRecruitmentTask
 {
@@ -11,20 +6,26 @@ namespace ElasticRecruitmentTask
     {
         public string OpenDialogWindow()
         {
-            OpenFileDialog openFile = new OpenFileDialog();
-            openFile.Filter = "CSV files (*.csv)| *.csv";
-            openFile.FilterIndex = 1;
-            openFile.Multiselect = false;
+            OpenFileDialog openFileDialog = initializeOpenFileDialog();
             string filePath = "";
-            if (openFile.ShowDialog() == DialogResult.OK)
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                filePath = openFile.FileName;
+                filePath = openFileDialog.FileName;
                 return filePath;
             }
             else
             {
                 return null;
             }
+        }
+
+        private static OpenFileDialog initializeOpenFileDialog()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "CSV files (*.csv)| *.csv";
+            openFileDialog.FilterIndex = 1;
+            openFileDialog.Multiselect = false;
+            return openFileDialog;
         }
     }
 }

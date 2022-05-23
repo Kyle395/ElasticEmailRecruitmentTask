@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using ElasticRecruitmentTask;
 
 namespace ElasticRecruitmentTaskTestUnit
@@ -7,29 +6,30 @@ namespace ElasticRecruitmentTaskTestUnit
     [TestClass]
     public class MailValidationTests
     {
+        MailValidation mailValidation;
         [TestMethod]
-        public void MailValidationTest1()
+        public void MailValidationTestCorrect()
         {
             string[] mails = new string[1];
             mails[0] = "examplemail@gmail.com";
-            MailValidation mailValidation = new MailValidation();
+            mailValidation = new MailValidation();
             Assert.IsTrue(mailValidation.ValidateRecipientEmail(mails));
             
         }
         [TestMethod]
-        public void MailValidationTest2()
+        public void MailValidationTestNoDot()
         {
             string[] mails = new string[1];
             mails[0] = "examplemail@gmailcom";
-            MailValidation mailValidation = new MailValidation();
+            mailValidation = new MailValidation();
             Assert.IsFalse(mailValidation.ValidateRecipientEmail(mails));
         }
         [TestMethod]
-        public void MailValidationTest3()
+        public void MailValidationTestNoAt()
         {
             string[] mails = new string[1];
             mails[0] = "examplemailgmail.com";
-            MailValidation mailValidation = new MailValidation();
+            mailValidation = new MailValidation();
             Assert.IsFalse(mailValidation.ValidateRecipientEmail(mails));
         }
     }

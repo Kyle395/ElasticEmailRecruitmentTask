@@ -1,33 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Web;
-using ElasticEmail.Api;
-using ElasticEmail.Client;
 using ElasticEmail.Model;
 
 namespace ElasticRecruitmentTask
 {
     public class SendSimpleMail : ConnectionConfig
     {
-        public EmailContent SetSender(string senderName, EmailContent emailContent)
+        private const int maxMailBodySize = 256;
+        private const int maxMailFieldSize = 64;
+        private string sender = "<wojciech.lukasz99@gmail.com>";
+        MailValidation mailValidation;
+        List<EmailRecipient> emailRecipients;
+        EmailMessageData emailMessageData;
+        public SendSimpleMail()
         {
-            string sender = "<wojciech.lukasz99@gmail.com>";
-            MailValidation mailValidation = new MailValidation();
-            if (mailValidation.ValidateMessageContent(senderName, 64))
+            mailValidation = new MailValidation();
+        }
+        public EmailContent SetSender(string senderName, EmailContent emailContent)
+        {              
+            if (mailValidation.ValidateMessageContent(senderName, maxMailFieldSize))
             {
                 sender = sender.Insert(0, senderName);
-                emailContent.From = sender;
             }
-            else emailContent.From = sender;
+            emailContent.From = sender;
             return emailContent;
         }
         public EmailContent SetSubject(string subject, EmailContent emailContent)
         {
-            MailValidation mailValidation = new MailValidation();
-            if (mailValidation.ValidateMessageContent(subject, 64))
+            if (mailValidation.ValidateMessageContent(subject, maxMailFieldSize))
             {
                 emailContent.Subject = subject;
             }
@@ -46,9 +46,8 @@ namespace ElasticRecruitmentTask
         }
         public BodyPart SetBody(string message)
         {
-            BodyPart bodyPart = new BodyPart();
-            MailValidation mailValidation = new MailValidation();
-            if(mailValidation.ValidateMessageContent(message, 256)){
+            BodyPart bodyPart = new BodyPart();           
+            if(mailValidation.ValidateMessageContent(message, maxMailBodySize)){
                 bodyPart.ContentType = SetBodyType(message);
                 bodyPart.Content = message;
             }
@@ -61,32 +60,25 @@ namespace ElasticRecruitmentTask
             emailContent.Body = bodyParts;
             return emailContent;
         }
-        public List<EmailRecipient> SetEmailRecipients (string[] recipients)
+        private void setEmailRecipients (string[] recipients)
         {
-            List<EmailRecipient> emailRecipients = new List<EmailRecipient>();
-
+            emailRecipients = new List<EmailRecipient>();
             foreach (var recipient in recipients)
             {
                 EmailRecipient emailRecipient = new EmailRecipient(recipient);
                 emailRecipients.Add(emailRecipient);
             }
-            return emailRecipients;
         }
-        public EmailMessageData SetMessageData(List<EmailRecipient> emailRecipients, EmailContent emailContent)
+        private void setMessageData(List<EmailRecipient> emailRecipients, EmailContent emailContent)
         {
-            EmailMessageData emailMessageData = new EmailMessageData(emailRecipients, emailContent);
-            return emailMessageData;
-
+            emailMessageData = new EmailMessageData(emailRecipients, emailContent);
         }
-        public EmailSend postEmail(string[] recipients, EmailContent emailContent)
+        public EmailSend PostEmail(string[] recipients, EmailContent emailContent)
         { 
             ConnectionConfig connectionConfig = new ConnectionConfig();
-            List<EmailRecipient> emailRecipients = SetEmailRecipients(recipients);
-            EmailMessageData emailMessageData = SetMessageData(emailRecipients, emailContent);
-            var result= connectionConfig.config().EmailsPost(emailMessageData);
-            return result;
+            setEmailRecipients(recipients);
+            setMessageData(emailRecipients, emailContent); 
+            return connectionConfig.Config().EmailsPost(emailMessageData);
         }
-
     }
-
 }

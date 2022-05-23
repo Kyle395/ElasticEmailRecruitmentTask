@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ElasticRecruitmentTask
 {
@@ -11,7 +7,6 @@ namespace ElasticRecruitmentTask
     {
         public bool ValidateRecipientEmail(string [] recipients)
         {
-            bool isEmailValid;
             MailAddress mail; 
             foreach(var recipient in recipients)
             {
@@ -21,11 +16,10 @@ namespace ElasticRecruitmentTask
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Incorect mail address: {0}",recipient);
+                    Console.WriteLine("Incorect mail address: {0}", recipient);
                     return false;
                 }
-                isEmailValid = mail.Host.Contains(".");
-                if (!isEmailValid)
+                if (!mail.Host.Contains("."))
                 {
                     Console.WriteLine("Incorect mail address: {0}", mail);
                     return false;
@@ -35,11 +29,7 @@ namespace ElasticRecruitmentTask
         }
         public bool ValidateMessageContent(string text, int maxSize)
         {
-            if (!String.IsNullOrWhiteSpace(text) && text.Length < maxSize)
-            {
-                return true;
-            }
-            else return false;
+            return !String.IsNullOrWhiteSpace(text) && text.Length < maxSize;
         }
     }
 }

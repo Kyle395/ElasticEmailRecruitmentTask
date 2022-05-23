@@ -9,7 +9,7 @@ namespace ElasticRecruitmentTaskTestUnit
     public class SetSubjectTests
     {
         [TestMethod]
-        public void SetSubjectTest1()
+        public void SetSubjectTestEmptySubject()
         {
             string subject = "\r\n        ";
             SendSimpleMail sendSimpleMail = new SendSimpleMail();
@@ -18,7 +18,7 @@ namespace ElasticRecruitmentTaskTestUnit
             Assert.AreEqual(null, emailContent.Subject);
         }
         [TestMethod]
-        public void SetSubjectTest2()
+        public void SetSubjectTestCorrectSubject()
         {
             string subject = "Dunder mifflin is taking over the world";
             SendSimpleMail sendSimpleMail = new SendSimpleMail();
