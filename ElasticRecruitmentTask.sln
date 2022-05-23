@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32407.337
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElasticRecruitmentTask", "ElasticRecruitmentTask\ElasticRecruitmentTask.csproj", "{9BDAA786-36FD-42BF-823E-6CD99AC6FE36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElasticRecruitmentTaskTestUnit", "ElasticRecruitmentTaskTestUnit\ElasticRecruitmentTaskTestUnit.csproj", "{90DBCA1E-5D76-4639-B2BD-C23F273C397A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9BDAA786-36FD-42BF-823E-6CD99AC6FE36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BDAA786-36FD-42BF-823E-6CD99AC6FE36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BDAA786-36FD-42BF-823E-6CD99AC6FE36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BDAA786-36FD-42BF-823E-6CD99AC6FE36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90DBCA1E-5D76-4639-B2BD-C23F273C397A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90DBCA1E-5D76-4639-B2BD-C23F273C397A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90DBCA1E-5D76-4639-B2BD-C23F273C397A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90DBCA1E-5D76-4639-B2BD-C23F273C397A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D48F7D87-6D8C-48C3-997A-BCC6DE144D50}
+	EndGlobalSection
+EndGlobal
