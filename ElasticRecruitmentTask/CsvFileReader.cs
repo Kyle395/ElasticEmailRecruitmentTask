@@ -6,6 +6,10 @@ namespace ElasticRecruitmentTask
 {
     class CsvFileReader
     {
+        MailValidation mailValidation;
+        public CsvFileReader(){
+            mailValidation = new MailValidation();
+        }
         public string[] ReadCsvFile(string filePath)
         {
             if (filePath == null)
@@ -26,7 +30,8 @@ namespace ElasticRecruitmentTask
                     parseData(address, parser);
                 }
                 address.RemoveAt(0);
-                return address.ToArray();
+                if (mailValidation.ValidateRecipientEmail(address.ToArray())) return address.ToArray();
+                return null;
             }
         }
 
